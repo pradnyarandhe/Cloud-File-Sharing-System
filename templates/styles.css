@@ -73,3 +73,19 @@ nav{
     padding: 0.5rem;
 }
 
+.upload-files {
+    border-radius: 8px;
+    width: 35rem;
+    height: 14rem;
+    background-color: #d5d8dc;
+    padding: 1.2rem;
+    font-weight: 600;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin: auto;
+    justify-content: center; /* Center content inside */
+    align-items: center; /* Align text inputs */
+}
+
+.form-control{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
