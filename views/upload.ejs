@@ -1,0 +1,38 @@
+<%- include("partials/header.ejs") %>
+
+<body>    
+    <div class="mt-5 upload-files">
+      <form action="/upload" method="post" enctype="multipart/form-data">
+            <div>
+                <label for="fileInput" class="form-label">Select Files To Upload On Drive</label>
+                <input class="form-control" type="file" name="file_name" id="fileInput" multiple>
+                <button type="submit" class="btn btn-primary btn-sm upload-btn">Upload</button>
+                <button type="button" class="btn btn-secondary btn-sm cancel-btn">Cancel</button>
+            </div>
+        </form>        
+    </div>
+    <% if (locals.success) { %>
+        <div class="alert alert-success" role="alert">
+            <%= success %>
+        </div>
+    <% } %>
+    <div class="mt-5 mb-5 display-files">
+        <h3 class="mt-2">Uploaded Files</h3>
+        <ul class="list-group">
+            <% if (files.length > 0) { %>
+                <% files.forEach(file => { %>
+                    <li class="list-group-item">
+                        <%= file.file_name %> - Uploaded on <%= new Date(file.upload_time).toLocaleString() %>
+                        <a href="/upload/<%= file.id %>" class="btn btn-success btn-sm float-end">Download</a>  
+                    </li>
+                <% }); %>
+                <% } else { %>
+                    <li class="list-group-item">No Files Uploaded yet</li>
+                <% } %>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+
+<%- include("partials/footer.ejs") %>
