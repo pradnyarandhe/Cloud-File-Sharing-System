@@ -71,6 +71,59 @@ app.get("/login", (req, res) => {
   res.render("login.ejs");
 });
 
+app.post("/login", (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  connection.query(
+      "select * from loginuser where user_name = ? and user_password = ?",
+      [email,password],
+      function (err, results) {
+          if (err) {
+              console.error("Database error:", err);
+              return res.redirect("/signup"); // Return to prevent multiple responses
+          }
+
+          // Check if user exists
+          if (results.length === 0) {
+              return res.redirect("/signup"); // No user found
+          }
+
+          // Check password (assuming passwords are stored as plaintext, which is bad)
+          if (results[0].user_password !== password) {
+              return res.redirect("/signup"); // Incorrect password
+          }
+
+          return res.redirect("/home");
+      }
+  );
+});
+
+app.get("/signup",(req,res)=>{
+  res.render("signup.ejs");
+})
+
+
+
+app.post("/signup", (req, res) => {
+  const { email, password, phoneno, fullname } = req.body;
+  console.log(req.body);  // Debugging log to check form data
+
+  if (!email || !password || !phoneno || !fullname) {
+      return res.status(400).json({ error: "All fields are required!" });
+  }
+
+  const sql = "INSERT INTO loginuser (user_name, user_password, phoneno, fullname) VALUES (?, ?, ?, ?)";
+  connection.query(sql, [email, password, phoneno, fullname], (err, result) => {
+      if (err) {
+          console.error("MySQL Insert Error:", err);
+          return res.status(500).json({ error: "Database error! Unable to register user." });
+      }
+      console.log("✅ User registered:", result.insertId);
+      res.redirect("/login"); 
+  });
+});
+
 // Retrieve File List API
 // app.get("/files", (req, res) => {
 //   db.query("SELECT id, file_name, file_type, upload_time FROM files", (err, results) => {
