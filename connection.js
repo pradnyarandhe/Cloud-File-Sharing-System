@@ -17,9 +17,11 @@ db.connect((err) => {
 
   // Create Database
   db.query("CREATE DATABASE IF NOT EXISTS file_upload_db", (err, result) => {
+    if (err) {
       console.error("Error creating database:", err);
     } else {
       console.log("Database 'file_upload_db' created or already exists.");
+    }
   });
 
   // Switch to the Database
