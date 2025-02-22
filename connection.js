@@ -1,4 +1,5 @@
-const mysql = require("mysql2");  // Use mysql2 instead of mysql
+import mysql from "mysql2";;
+// const mysql = require("mysql2");  // Use mysql2 instead of mysql
 
 // Create a MySQL connection
 const db = mysql.createConnection({
@@ -43,13 +44,26 @@ db.connect((err) => {
       );
     `;
 
-    db.query(createTableQuery, (err, result) => {
-      if (err) {
-        console.error("Error creating table:", err);
-      } else {
-        console.log("Table 'files' created successfully!");
-      }
-      db.end(); // Close the database connection
-    });
+   
+    //Table for UserLogin
+    const createTableForUser = `
+    CREATE TABLE IF NOT EXISTS loginuser (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      user_name VARCHAR(255) NOT NULL,
+      user_password VARCHAR(50) NOT NULL,
+      phoneno varchar(10) NOT NULL, 
+      fullname VARCHAR(100) NOT NULL
+    );
+  `;
+  db.query(createTableForUser, (err, result) => {
+    if (err) {
+      console.error("Error creating table:", err);
+    } else {
+      console.log("Table 'loginuser' created successfully!");
+    }
+    db.end(); // Close the database connection
+  });
+
+
   });
 });

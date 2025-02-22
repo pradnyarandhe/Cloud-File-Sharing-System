@@ -75,7 +75,7 @@ app.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  connection.query(
+  db.query(
       "select * from loginuser where user_name = ? and user_password = ?",
       [email,password],
       function (err, results) {
@@ -94,7 +94,7 @@ app.post("/login", (req, res) => {
               return res.redirect("/signup"); // Incorrect password
           }
 
-          return res.redirect("/home");
+          return res.redirect("/upload");
       }
   );
 });
@@ -114,7 +114,7 @@ app.post("/signup", (req, res) => {
   }
 
   const sql = "INSERT INTO loginuser (user_name, user_password, phoneno, fullname) VALUES (?, ?, ?, ?)";
-  connection.query(sql, [email, password, phoneno, fullname], (err, result) => {
+  db.query(sql, [email, password, phoneno, fullname], (err, result) => {
       if (err) {
           console.error("MySQL Insert Error:", err);
           return res.status(500).json({ error: "Database error! Unable to register user." });
@@ -148,6 +148,6 @@ app.get("/upload/:id", (req, res) => {
 
 
 // Start Server
-const PORT = 5000;
+const PORT = 3600;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
 
