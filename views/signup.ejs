@@ -1,0 +1,44 @@
+<%- include("partials/header.ejs")%>
+
+    <body>
+        <div class="signup">
+            <form action="/signup" method="POST">
+
+                <div class="mb-3 row">
+                    <label for="inputFullName" class="col-sm-3 col-form-label">Full Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="fullname" class="form-control" id="inputFullName"
+                            placeholder="Enter your Full Name" required>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="inputPhoneno" class="col-sm-3 col-form-label">Phone No</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="phoneno" class="form-control" id="inputPhoneno"
+                            placeholder="Enter your Phone Number" required>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="inputEmail" class="col-sm-3 col-form-label">Email ID</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="email" class="form-control" id="inputEmail"
+                            placeholder="Enter your Email ID" required >
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
+                    <div class="col-sm-9">
+                        <input type="password" name="password" class="form-control" id="inputPassword"
+                            placeholder="Enter your Password" required>
+                    </div>
+                </div>
+                <button type="submit" value="submit" class="btn btn-success login-btn">Sign Up</button>
+            </form>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+
+    </body>
+    <%- include("partials/footer.ejs")%>
