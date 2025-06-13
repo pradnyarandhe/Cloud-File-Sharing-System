@@ -44,6 +44,14 @@ db.connect((err) => {
       );
     `;
 
+    db.query(createTableQuery, (err, result) => {
+      if (err) {
+        console.error("Error creating table:", err);
+      } else {
+        console.log("Table 'files' created successfully!");
+      }
+
+    });
     //Table for UserLogin
     const createTableForUser = `
     CREATE TABLE IF NOT EXISTS loginuser (
