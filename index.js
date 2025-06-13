@@ -274,6 +274,8 @@ app.post("/delete", (req, res) => {
     }
 
     console.log("File deleted:", fileName);
+    req.session.success = "File deleted successfully!";
+    //res.render("/upload");
     res.json({ message: "File deleted successfully" });
   });
 });
